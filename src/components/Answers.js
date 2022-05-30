@@ -2,11 +2,10 @@ import React from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { DataGrid } from "@mui/x-data-grid";
 import { Button } from "@mui/material";
+import swal from "sweetalert";
 
 const Answers = () => {
   const { state } = useLocation();
-  console.log("state", state);
-
   const navigate = useNavigate();
 
   const columns = [
@@ -22,6 +21,12 @@ const Answers = () => {
       width: 200,
     },
   ];
+
+  const confirmHandler = () => {
+    swal("Confirmed!", "Message!", "success").then(function () {
+      navigate("/", { replace: true });
+    });
+  };
 
   return (
     <>
@@ -51,7 +56,7 @@ const Answers = () => {
               checkboxSelection
             />
           </div>
-          <Button onClick={() => navigate("/")}>Confirm</Button>
+          <Button onClick={confirmHandler}>Confirm</Button>
         </div>
       )}
     </>

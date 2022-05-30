@@ -1,13 +1,12 @@
-import React, { useEffect, useState } from "react";
+import React, { memo, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import MultipleQuestion from "./MultipleQuestion";
 import TextQuestion from "./TextQuestion";
-// import data from "../questionnaire.json";
 import initialData from "../data.json";
 import { Button, Typography } from "@mui/material";
 import BoxUi from "./UI/BoxUi";
 
-const Container = () => {
+const Container = memo(() => {
   const [questionnaire, setQuestionnaire] = useState([]);
   const [questions, setQuestions] = useState([]);
   const [currentQuestionNumber, setCurrentQuestionNumber] = useState(1);
@@ -79,14 +78,14 @@ const Container = () => {
             </Typography>
             <div>
               <Button
-                onClick={() => prevQuestion()}
+                onClick={prevQuestion}
                 disabled={currentQuestionNumber === 1}
               >
                 Prev
               </Button>
               <span>{currentQuestionNumber}</span>
               <Button
-                onClick={() => nextQuestion()}
+                onClick={nextQuestion}
                 disabled={false || currentQuestionNumber === questions.length}
               >
                 Next
@@ -131,6 +130,6 @@ const Container = () => {
       </main>
     </div>
   );
-};
+});
 
 export default Container;

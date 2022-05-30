@@ -1,4 +1,4 @@
-import React from "react";
+import React, { memo } from "react";
 import {
   FormControl,
   FormControlLabel,
@@ -9,46 +9,41 @@ import {
   Checkbox,
 } from "@mui/material";
 
-const MultipleQuestion = ({
-  currentQuestionNumber,
-  currentQuestion,
-  answerObj,
-  save,
-}) => {
-  const radioHandler = (data) => {
-    save(
-      "radio",
-      currentQuestionNumber,
-      currentQuestion.headline,
-      data.target.value
-    );
-  };
+const MultipleQuestion = memo(
+  ({ currentQuestionNumber, currentQuestion, answerObj, save }) => {
+    const radioHandler = (data) => {
+      save(
+        "radio",
+        currentQuestionNumber,
+        currentQuestion.headline,
+        data.target.value
+      );
+    };
 
-  const handleOnChange = (e, position) => {
-    const data = e.target.value;
-    let checkboxState = [];
-    if (answerObj && answerObj.data.length > 0) {
-      checkboxState = answerObj.data;
-    }
-    if (checkboxState[position]) {
-      checkboxState[position] = null;
-    } else {
-      checkboxState[position] = data;
-    }
-    save(
-      "checkbox",
-      currentQuestionNumber,
-      currentQuestion.headline,
-      checkboxState
-    );
-  };
+    const handleOnChange = (e, position) => {
+      const data = e.target.value;
+      let checkboxState = [];
+      if (answerObj && answerObj.data.length > 0) {
+        checkboxState = answerObj.data;
+      }
+      if (checkboxState[position]) {
+        checkboxState[position] = null;
+      } else {
+        checkboxState[position] = data;
+      }
+      save(
+        "checkbox",
+        currentQuestionNumber,
+        currentQuestion.headline,
+        checkboxState
+      );
+    };
 
-  return (
-    <div>
-      {currentQuestion && (
-        <>
-          <div>
-            <>
+    return (
+      <div>
+        {currentQuestion && (
+          <>
+            <div>
               <FormControl>
                 <FormLabel id="demo-radio-buttons-group-label">
                   {currentQuestionNumber}. {currentQuestion.headline}
@@ -90,12 +85,12 @@ const MultipleQuestion = ({
                   </FormGroup>
                 )}
               </FormControl>
-            </>
-          </div>
-        </>
-      )}
-    </div>
-  );
-};
+            </div>
+          </>
+        )}
+      </div>
+    );
+  }
+);
 
 export default MultipleQuestion;
