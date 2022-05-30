@@ -1,12 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import MultipleQuestion from ".//MultipleQuestion";
-import TextQuestion from ".//TextQuestion";
+import MultipleQuestion from "./MultipleQuestion";
+import TextQuestion from "./TextQuestion";
 // import data from "../questionnaire.json";
 import initialData from "../data.json";
 import { Button, Typography } from "@mui/material";
 import BoxUi from "./UI/BoxUi";
-import NewMultiple from "./NewMultiple";
 
 const Container = () => {
   const [questionnaire, setQuestionnaire] = useState([]);
@@ -96,7 +95,7 @@ const Container = () => {
             <BoxUi>
               {questions[currentQuestionNumber - 1]?.question_type ===
               "multiple-choice" ? (
-                <NewMultiple
+                <MultipleQuestion
                   currentQuestionNumber={currentQuestionNumber}
                   currentQuestion={questions[currentQuestionNumber - 1]}
                   answerObj={answers.find(

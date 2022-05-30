@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import {
   FormControl,
   FormControlLabel,
@@ -15,8 +15,6 @@ const MultipleQuestion = ({
   answerObj,
   save,
 }) => {
-  console.log("answerObj", answerObj);
-
   const radioHandler = (data) => {
     save(
       "radio",
@@ -26,42 +24,22 @@ const MultipleQuestion = ({
     );
   };
 
-  const [checkedState, setCheckedState] = useState(
-    new Array(currentQuestion.choices.length).fill(null)
-  );
-  console.log(checkedState);
-
-  useEffect(() => {
-    if (answerObj) {
-      console.log(answerObj.data);
-      setCheckedState(answerObj.data);
-      console.log(
-        new Array(currentQuestion.choices.length).map((item, index) =>
-          item !== null ? answerObj.data[index] : null
-        )
-      );
-    }
-    setCheckedState(new Array(currentQuestion.choices.length).fill(null));
-  }, [currentQuestion]);
-
-  // console.log(currentQuestionNumber, checkedState);
-
   const handleOnChange = (e, position) => {
     const data = e.target.value;
-    let updatedCheckedState = checkedState;
-    if (checkedState[position]) {
-      updatedCheckedState[position] = null;
-    } else {
-      updatedCheckedState[position] = data;
+    let checkboxState = [];
+    if (answerObj && answerObj.data.length > 0) {
+      checkboxState = answerObj.data;
     }
-
-    setCheckedState(updatedCheckedState);
-
+    if (checkboxState[position]) {
+      checkboxState[position] = null;
+    } else {
+      checkboxState[position] = data;
+    }
     save(
       "checkbox",
       currentQuestionNumber,
       currentQuestion.headline,
-      updatedCheckedState
+      checkboxState
     );
   };
 
@@ -87,7 +65,7 @@ const MultipleQuestion = ({
                       <FormControlLabel
                         key={index}
                         value={item.value + currentQuestionNumber}
-                        control={<Radio />}
+                        control={<Radio color="success" />}
                         label={item.label}
                       />
                     ))}
@@ -101,33 +79,15 @@ const MultipleQuestion = ({
                           <Checkbox
                             name={item.value + currentQuestionNumber}
                             value={item.value + currentQuestionNumber}
-                            checked={answerObj && answerObj.data[index]}
+                            checked={!!answerObj && !!answerObj.data[index]}
                             onChange={(e) => handleOnChange(e, index)}
+                            color="success"
                           />
                         }
                         label={item.value}
                       />
                     ))}
                   </FormGroup>
-                  // <FormGroup>
-                  //   {currentQuestion.choices.map((item, index) => {
-                  //     return (
-                  //       <div key={index} className="toppings-list-item">
-                  //         <div className="left-section">
-                  //           <input
-                  //             className="option"
-                  //             type="checkbox"
-                  //             id={index}
-                  //             value={item.value + currentQuestionNumber}
-                  //             checked={answerObj?.data[index]}
-                  //             onChange={(e) => handleOnChange(e, index)}
-                  //           />
-                  //           <label>{item.value}</label>
-                  //         </div>
-                  //       </div>
-                  //     );
-                  //   })}
-                  // </FormGroup>
                 )}
               </FormControl>
             </>
