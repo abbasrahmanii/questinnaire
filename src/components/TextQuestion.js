@@ -27,7 +27,6 @@ const TextQuestion = ({
                 variant="outlined"
                 multiline
                 value={answerObj ? answerObj.answer : ""}
-                // value={answerObj ? answerObj.data : ""}
                 onChange={(e) => handleChange(e)}
               />
             ) : (
@@ -35,7 +34,6 @@ const TextQuestion = ({
                 id="outlined-multiline-flexible"
                 label="Answer"
                 value={answerObj ? answerObj.answer : ""}
-                // value={answerObj ? answerObj.data : ""}
                 onChange={(e) => handleChange(e)}
               />
             )}

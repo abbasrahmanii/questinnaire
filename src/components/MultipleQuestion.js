@@ -24,9 +24,7 @@ const MultipleQuestion = memo(
       const data = e.target.value;
       let checkboxState = [];
       if (answerObj && answerObj.answer.length > 0) {
-        // if (answerObj && answerObj.data.length > 0) {
         checkboxState = answerObj.answer;
-        // checkboxState = answerObj.data;
       }
       if (checkboxState[position]) {
         checkboxState[position] = null;
@@ -54,16 +52,13 @@ const MultipleQuestion = memo(
                   <RadioGroup
                     aria-labelledby="demo-radio-buttons-group-label"
                     defaultValue=""
-                    // name="radio-buttons-group"
                     name={currentQuestionNumber}
                     onChange={radioHandler}
                     value={answerObj ? answerObj.answer : ""}
-                    // value={answerObj ? answerObj.data : ""}
                   >
                     {currentQuestion.choices.map((item, index) => (
                       <FormControlLabel
                         key={index}
-                        // value={item.value + currentQuestionNumber}
                         value={item.value}
                         control={<Radio color="success" />}
                         label={item.label}
@@ -78,11 +73,8 @@ const MultipleQuestion = memo(
                         control={
                           <Checkbox
                             name={item.value}
-                            // name={item.value + currentQuestionNumber}
                             value={item.value}
-                            // value={item.value + currentQuestionNumber}
                             checked={!!answerObj && !!answerObj.answer[index]}
-                            // checked={!!answerObj && !!answerObj.data[index]}
                             onChange={(e) => handleOnChange(e, index)}
                             color="success"
                           />
