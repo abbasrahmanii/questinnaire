@@ -26,14 +26,16 @@ const TextQuestion = ({
                 label="Answer"
                 variant="outlined"
                 multiline
-                value={answerObj ? answerObj.data : ""}
+                value={answerObj ? answerObj.answer : ""}
+                // value={answerObj ? answerObj.data : ""}
                 onChange={(e) => handleChange(e)}
               />
             ) : (
               <TextField
                 id="outlined-multiline-flexible"
                 label="Answer"
-                value={answerObj ? answerObj.data : ""}
+                value={answerObj ? answerObj.answer : ""}
+                // value={answerObj ? answerObj.data : ""}
                 onChange={(e) => handleChange(e)}
               />
             )}

@@ -28,21 +28,24 @@ const Container = memo(() => {
       newItem = {
         id: number,
         question,
-        data,
-        answer: data.substring(0, data.length - number.toString().length),
+        // data,
+        answer: data,
+        // answer: data.substring(0, data.length - number.toString().length),
       };
     } else if (type === "text") {
-      newItem = { id: number, question, data, answer: data };
+      // newItem = { id: number, question, data, answer: data };
+      newItem = { id: number, question, answer: data };
     } else if (type === "checkbox") {
       newItem = {
         id: number,
         question,
-        data: data,
-        answer: data.map((item) =>
-          item !== null
-            ? item.substring(0, item.length - number.toString().length)
-            : item
-        ),
+        // data: data,
+        answer: data,
+        // answer: data.map((item) =>
+        //   item !== null
+        //     ? item.substring(0, item.length - number.toString().length)
+        //     : item
+        // ),
       };
     }
     const answer = answers.findIndex((item) => item.id === number);
